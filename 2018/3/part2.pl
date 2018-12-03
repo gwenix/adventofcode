@@ -46,6 +46,7 @@ foreach my $l (@lines) {
   $claims{$claim}{endj} = $endj;
 }
 
+# Running through the claim swatches to see if they have overlapping bits
 my $winclaim=0;
 foreach my $claim (keys %claims) {
   unless ($winclaim) {
@@ -55,7 +56,6 @@ foreach my $claim (keys %claims) {
     my $endj = $claims{$claim}{endj};
     my $stop=0;
 
-    my $allnew=0;
     my $i=$starti;
     my $j=$startj;
     while (!$stop) {
