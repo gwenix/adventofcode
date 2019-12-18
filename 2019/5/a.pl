@@ -19,7 +19,7 @@ close (F);
 
 foreach my $l (@lines) {
   my $list = Run_Intcode($l);
-  #print "$l\n->\n$list\n\n";
+  print "$l\n->\n$list\n\n";
 }
 
 exit;
@@ -50,9 +50,9 @@ sub Run_Intcode {
 	$mode[$i] = pop(@foo);
       }
     }
-    $a=$pos[$a] unless ($mode[2] || $opcode==3 || $opcode==4);
+    $a=$pos[$a] unless ($mode[2] || $opcode==3);
     $b=$pos[$b] unless ($mode[1] || $opcode==3 || $opcode==4);
-    #$c=$pos[$c] unless ($mode[0]); # Always output parameter
+    #$c=$pos[$c] unless ($mode[0]); # Always for storing in a register
 
     if ($opcode==1) {
       my $result=$a+$b;
@@ -70,8 +70,7 @@ sub Run_Intcode {
       $pos[$a]=$input;
       $curr+=2;
     } elsif ($opcode==4) {
-      my $output=$a;
-      print "Output: $output\n";
+      print "Output: $a\n";
       $curr+=2;
     } else {
       die "Unknown opcode: $opcode\n";
